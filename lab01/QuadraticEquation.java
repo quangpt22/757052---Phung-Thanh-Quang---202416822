@@ -28,7 +28,9 @@ public class QuadraticEquation {
                 JOptionPane.showMessageDialog(null, "The equation has 1 solution x = " + ans);
             }
             else {
-                double x1 = (- b + Math.sqrt(delta)) 
+                double x1 = (- b + Math.sqrt(delta)) / (2 * a);
+                double x2= (- b -Math.sqrt(delta)) / (2 * a);
+                JOptionPane.showMessageDialog(null, "The equation has 2 solutions x1 = " + x1 + " and x2 = " + x2);
             }
         }
     }
