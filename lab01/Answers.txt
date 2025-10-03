@@ -1,0 +1,11 @@
+Q1: What happens if users choose “Cancel”?
+A: The program returns "No" since due to the line (option==JOptionPane.YES_OPTION?"Yes":"No"), as long as the user choose any options other than "Yes", the program would return "No".
+
+Q2: How to customize the options to users, e.g. only two option “Yes” and “No”, OR “I do” and “I don’t”
+A: We can use JOptionPane.showOptionDialog
+    - Step 1: Pass your choices of label into an array. E.g: String[] options = {"I do", "I don't"};
+    - Step 2: Call JOptionPane.showOptionDialog and store it into a variable. This method takes in 8 parameters. The most important ones are:
+        + 2nd parameter: Message to display
+        + 4th parameter: Default option types (Yes, No, OK, Cancel)
+        + 7th parameter: Labels of each button to display
+    - Step 3: Write an if else function for what to display when the user click each button. The argument to be passed in is the above variable compare with the index of the options array.
