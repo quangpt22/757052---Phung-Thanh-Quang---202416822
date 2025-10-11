@@ -54,5 +54,9 @@ public class Cart {
 			array[i] = itemsOrdered[i].getTitle();
 		}
 	}
+
+	public DigitalVideoDisc indexToDisc(int i) {
+		return itemsOrdered[i-1];
+	}
 	
 }

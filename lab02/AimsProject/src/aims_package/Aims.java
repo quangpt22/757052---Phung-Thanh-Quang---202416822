@@ -146,6 +146,7 @@ public class Aims {
 			System.out.println("-----------------------------------------------");
 			store.browseStore();
 
+			System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 			System.out.println("Enter 0 to go back");
 			choice = sc.nextInt();
 			sc.nextLine();
@@ -303,7 +304,7 @@ public class Aims {
 
 			switch (choice) {
 				case 1:
-					
+					listenToDemo();
 					break;
 				case 2:
 					sortCart();
@@ -319,6 +320,30 @@ public class Aims {
 					return;
 				default:
 					break;
+			}
+		}
+		while (true);
+	}
+
+	public static void listenToDemo() {
+		int choice = -1;
+		do {
+			System.out.println("Enter the index of the DVD you want to listen to the demo:");
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+				if (choice > 0 && choice <= Cart.qtyOrdered) {
+					playDemo(anOrder.indexToDisc(choice));
+					return;
+				}
+				else {
+					System.out.println("Index out of range, please try again");
+					choice = -1;
+				}
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("Invalid option, please try again");
+				sc.nextLine();
+				choice = -1;
 			}
 		}
 		while (true);
