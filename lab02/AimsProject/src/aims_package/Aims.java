@@ -81,162 +81,185 @@ public class Aims {
 	}
 
 	public static void logIn () {
-		System.out.println("-----------------------------------------------");
-		System.out.println("Log in: Please choose your role");
-		System.out.println("1. Customer");
-		System.out.println("2. Store manager");
-		int choice = sc.nextInt();
-		sc.nextLine();
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Log in: Please choose your role");
+			System.out.println("1. Customer");
+			System.out.println("2. Store manager");
+			System.out.println("3. Exit the program");
+			choice = sc.nextInt();
+			sc.nextLine();
 
-		switch (choice) {
-			case 1:
-				customerActions();
-				break;
-			case 2:
-				break;
-			default:
-				System.out.println("Invalid option, please try again.");
-				break;
+			switch (choice) {
+				case 1:
+					customerActions();
+					break;
+				case 2:
+					break;
+				case 3:
+					System.out.println("Exiting the program...");
+					break;
+				default:
+					System.out.println("Invalid option, please try again.");
+					break;
+			}
 		}
-
+		while (choice != 3);
 	}
 
 	public static void customerActions() {
-		System.out.println("-----------------------------------------------");
-		System.out.println("What do you want to do?");
-		System.out.println("1. Browse DVDS available");
-		System.out.println("2. Search DVD");
-		System.out.println("3. View cart");
-		System.out.println("4. Exit to login screen");
-		int choice = sc.nextInt();
-		sc.nextLine();
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("What do you want to do?");
+			System.out.println("1. Browse DVDS available");
+			System.out.println("2. Search DVD");
+			System.out.println("3. View cart");
+			System.out.println("4. Exit to login screen");
+			choice = sc.nextInt();
+			sc.nextLine();
 
-		switch (choice) {
-			case 1:
-				browseDVD();
-				break;
-			case 2:
-				searchDVD();
-				break;
-			case 3:
-				break;
-			case 4:
-				return;
-			default:
-				System.out.println("Invalid option, please try again.");
-				break;
+			switch (choice) {
+				case 1:
+					browseDVD();
+					break;
+				case 2:
+					searchDVD();
+					break;
+				case 3:
+					break;
+				case 4:
+					return;
+				default:
+					System.out.println("Invalid option, please try again.");
+					break;
+			}
 		}
+		while (true);
 	}
 
 	public static void browseDVD() {
-		System.out.println("-----------------------------------------------");
-		store.browseStore();
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			store.browseStore();
 
-		System.out.println("Enter 0 to go back");
-		int choice = sc.nextInt();
-		sc.nextLine();
-		switch (choice) {
-			case 0:
-				return;
-			default:
-				System.out.println("Invalid option, please try again.");
-				break;
+			System.out.println("Enter 0 to go back");
+			choice = sc.nextInt();
+			sc.nextLine();
+			switch (choice) {
+				case 0:
+					return;
+				default:
+					System.out.println("Invalid option, please try again.");
+					break;
+			}
 		}
+		while (choice != 0);
 	}
 
 	public static void searchDVD() {
-		System.out.println("-----------------------------------------------");
-		System.out.println("Which type of search do you want?");
-		System.out.println("1. Search by title");
-		System.out.println("2. Search by category");
-		System.out.println("3. Search by price");
-		System.out.println("4. Exit to main screen");
-		int choice = sc.nextInt();
-		sc.nextLine();
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Which type of search do you want?");
+			System.out.println("1. Search by title");
+			System.out.println("2. Search by category");
+			System.out.println("3. Search by price");
+			System.out.println("4. Exit to main screen");
+			choice = sc.nextInt();
+			sc.nextLine();
 
-		switch (choice) {
-			case 1:
-				System.out.println("-----------------------------------------------");
-				store.searchDVDByTitle();
-				System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-				detailScreen();
-				break;
-			case 2:
-				System.out.println("-----------------------------------------------");
-				store.searchDVDByCategory();
-				System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-				detailScreen();
-				break;
-			case 3:
-				System.out.println("-----------------------------------------------");
-				store.searchDVDByPrice();
-				System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-				detailScreen();
-				break;
-			case 4:
-				return;
-			default:
-				System.out.println("Invalid option, please try again.");
-				break;
+			switch (choice) {
+				case 1:
+					System.out.println("-----------------------------------------------");
+					store.searchDVDByTitle();
+					System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+					detailScreen();
+					break;
+				case 2:
+					System.out.println("-----------------------------------------------");
+					store.searchDVDByCategory();
+					System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+					detailScreen();
+					break;
+				case 3:
+					System.out.println("-----------------------------------------------");
+					store.searchDVDByPrice();
+					System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+					detailScreen();
+					break;
+				case 4:
+					return;
+				default:
+					System.out.println("Invalid option, please try again.");
+					break;
+			}
 		}
+		while (true);
 	}
 
 	public static void detailScreen() {
-		System.out.println("Please choose the following actions: ");
-		System.out.println("1. View detail information");
-		System.out.println("2. Play demo");
-		System.out.println("3. Go back to search DVD screen");
-		int choice = sc.nextInt();
-		sc.nextLine();
+		int choice;
+		do {
+			System.out.println("Please choose the following actions: ");
+			System.out.println("1. View detail information");
+			System.out.println("2. Play demo");
+			System.out.println("3. Go back to search DVD screen");
+			choice = sc.nextInt();
+			sc.nextLine();
 
-		switch (choice) {
-			case 1:
-				System.out.println("-----------------------------------------------");
-				System.out.println("Enter the title of the DVD you want to view detail information:");
-				String dvdInfo = sc.nextLine().toLowerCase();
-				DigitalVideoDisc addedDVD = store.checkForDemo(dvdInfo);
-				if (addedDVD != null) {
-					System.out.println("Film name: " + addedDVD.getTitle());
-					System.out.println("Category: " + addedDVD.getCategory());
-					System.out.println("Director: " + addedDVD.getDirector());
-					System.out.println("Length: " + addedDVD.getLength());
-					System.out.println("Price: " + addedDVD.getCost());
-					System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-					System.out.println("Please proceed with these actions:");
-					System.out.println("1. Add to cart");
-					System.out.println("2. Return");
-					int opt = sc.nextInt();
-					sc.nextLine();
-					if (opt == 1) {
-						anOrder.addDigitalVideoDisc(addedDVD);
-						anOrder.showCart();
-					}
-					else if (opt == 2) {
-						return;
+			switch (choice) {
+				case 1:
+					System.out.println("-----------------------------------------------");
+					System.out.println("Enter the title of the DVD you want to view detail information:");
+					String dvdInfo = sc.nextLine().toLowerCase();
+					DigitalVideoDisc addedDVD = store.checkForDemo(dvdInfo);
+					if (addedDVD != null) {
+						System.out.println("Film name: " + addedDVD.getTitle());
+						System.out.println("Category: " + addedDVD.getCategory());
+						System.out.println("Director: " + addedDVD.getDirector());
+						System.out.println("Length: " + addedDVD.getLength());
+						System.out.println("Price: " + addedDVD.getCost());
+						System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+						System.out.println("Please proceed with these actions:");
+						System.out.println("1. Add to cart");
+						System.out.println("2. Return");
+						int opt = sc.nextInt();
+						sc.nextLine();
+						if (opt == 1) {
+							anOrder.addDigitalVideoDisc(addedDVD);
+							anOrder.showCart();
+						}
+						else if (opt == 2) {
+							return;
+						}
+						else {
+							System.out.println("Invalid option, please try again.");
+						}
 					}
 					else {
-						System.out.println("Invalid option, please try again.");
+						System.out.println("Invalid title, please try again.");
 					}
-				}
-				else {
-					System.out.println("Invalid title, please try again.");
-				}
-				break;
-			case 2:
-				System.out.println("-----------------------------------------------");
-				System.out.println("Enter the title of the DVD you want to play demo:");
-				String demoDVD = sc.nextLine().toLowerCase();
-				DigitalVideoDisc DVD = store.checkForDemo(demoDVD);
-				if (DVD != null) {
-					playDemo(DVD);
-				}
-				break;
-			case 3:
-				return;
-			default:
-				System.out.println("Invalid option, please try again.");
-				break;
+					break;
+				case 2:
+					System.out.println("-----------------------------------------------");
+					System.out.println("Enter the title of the DVD you want to play demo:");
+					String demoDVD = sc.nextLine().toLowerCase();
+					DigitalVideoDisc DVD = store.checkForDemo(demoDVD);
+					if (DVD != null) {
+						playDemo(DVD);
+					}
+					break;
+				case 3:
+					return;
+				default:
+					System.out.println("Invalid option, please try again.");
+					break;
+			}
 		}
+		while (true);
 	}
 
 	public static void playDemo(DigitalVideoDisc disc) {
