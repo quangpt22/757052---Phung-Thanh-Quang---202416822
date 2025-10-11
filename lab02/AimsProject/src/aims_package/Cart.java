@@ -3,6 +3,7 @@ import java.util.Arrays;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
+	public static final double VAT = 0.1;
 	private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
 	private int quantity[] = new int[MAX_NUMBERS_ORDERED];
 	public static int qtyOrdered = 0;
@@ -90,5 +91,26 @@ public class Cart {
 			}
 		}
 		return 0;
+	}
+
+	public double feeCalculation() {
+		int maxFee = 10;
+		int minFee = 3;
+		int freeItemIndex = (int)(Math.random() * qtyOrdered);
+		quantity[freeItemIndex]--;
+		System.out.println("NOTE: As part of our program, a DVD will be picked randomly to be free of charge. The DVD in question is " + itemsOrdered[freeItemIndex].getTitle() + " - " + itemsOrdered[freeItemIndex].getDirector());
+		System.out.println("Your current order (Excluding the free item): ");
+		float total = 0;
+		for (int i = 0; i < qtyOrdered; i++) {
+			DigitalVideoDisc temp = itemsOrdered[i];
+			total += temp.getCost() * quantity[i];
+			System.out.println((i+1) + ": " + temp.getTitle()+ " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$" + " - " + quantity[i] + " item(s)");
+		}
+		double deliveryFee = (Math.random() * (maxFee - minFee + 1)) + minFee;
+		System.out.println("Delivery fee: " + deliveryFee);
+		System.out.println("Total cost before VAT: " + (total + deliveryFee));
+		double totalFinal = (total + deliveryFee) * (1 + VAT);
+		System.out.println("Total cost after VAT (10%) " + totalFinal);
+		return totalFinal;
 	}
 }

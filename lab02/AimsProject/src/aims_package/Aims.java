@@ -205,6 +205,7 @@ public class Aims {
 	public static void detailScreen() {
 		int choice;
 		do {
+			System.out.println("-----------------------------------------------");
 			System.out.println("Please choose the following actions: ");
 			System.out.println("1. View detail information");
 			System.out.println("2. Play demo");
@@ -321,6 +322,7 @@ public class Aims {
 					filterDVD();
 					break;
 				case 6:
+					placeOrder();
 					break;
 				case 7:
 					return;
@@ -509,5 +511,43 @@ public class Aims {
 			}
 		}
 		while (choice == -1);
+	}
+
+	public static void placeOrder() {
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Please enter your name: ");
+			String custName = sc.nextLine();
+			double finalFee = anOrder.feeCalculation();
+			System.out.println("-----------------------------------------------");
+			System.out.println("Please choose the following options:");
+			System.out.println("1. Proceed payment");
+			System.out.println("2. Go back");
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			
+				switch (choice) {
+					case 1:
+						System.out.println("Customer name: " + custName);
+						System.out.println("Transfer amount: " + finalFee);
+						return;
+					case 2:
+					  	return;
+					default:
+						break;
+				}
+			}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+			}
+
+		}
+		while (true);
+	}
+
+	public static void payOrder() {
+
 	}
 }
