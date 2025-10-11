@@ -213,36 +213,7 @@ public class Aims {
 
 			switch (choice) {
 				case 1:
-					System.out.println("-----------------------------------------------");
-					System.out.println("Enter the title of the DVD you want to view detail information:");
-					String dvdInfo = sc.nextLine().toLowerCase();
-					DigitalVideoDisc addedDVD = store.checkForDemo(dvdInfo);
-					if (addedDVD != null) {
-						System.out.println("Film name: " + addedDVD.getTitle());
-						System.out.println("Category: " + addedDVD.getCategory());
-						System.out.println("Director: " + addedDVD.getDirector());
-						System.out.println("Length: " + addedDVD.getLength());
-						System.out.println("Price: " + addedDVD.getCost());
-						System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-						System.out.println("Please proceed with these actions:");
-						System.out.println("1. Add to cart");
-						System.out.println("2. Return");
-						int opt = sc.nextInt();
-						sc.nextLine();
-						if (opt == 1) {
-							anOrder.addDigitalVideoDisc(addedDVD);
-							anOrder.showCart();
-						}
-						else if (opt == 2) {
-							return;
-						}
-						else {
-							System.out.println("Invalid option, please try again.");
-						}
-					}
-					else {
-						System.out.println("Invalid title, please try again.");
-					}
+					viewDVDInfo();
 					break;
 				case 2:
 					System.out.println("-----------------------------------------------");
@@ -258,6 +229,43 @@ public class Aims {
 				default:
 					System.out.println("Invalid option, please try again.");
 					break;
+			}
+		}
+		while (true);
+	}
+
+	public static void viewDVDInfo () {
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Enter the title of the DVD you want to view detail information:");
+			String dvdInfo = sc.nextLine().toLowerCase();
+			DigitalVideoDisc addedDVD = store.checkForDemo(dvdInfo);
+			if (addedDVD != null) {
+				System.out.println("Film name: " + addedDVD.getTitle());
+				System.out.println("Category: " + addedDVD.getCategory());
+				System.out.println("Director: " + addedDVD.getDirector());
+				System.out.println("Length: " + addedDVD.getLength());
+				System.out.println("Price: " + addedDVD.getCost());
+				System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+				System.out.println("Please proceed with these actions:");
+				System.out.println("1. Add to cart");
+				System.out.println("2. Return");
+				int opt = sc.nextInt();
+				sc.nextLine();
+				if (opt == 1) {
+					anOrder.addDigitalVideoDisc(addedDVD);
+					anOrder.showCart();
+					return;
+				}
+				else if (opt == 2) {
+					return;
+				}
+				else {
+					System.out.println("Invalid option, please try again.");
+				}
+			}	
+			else {
+				System.out.println("Invalid title, please try again.");
 			}
 		}
 		while (true);
