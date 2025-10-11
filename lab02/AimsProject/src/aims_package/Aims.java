@@ -291,7 +291,7 @@ public class Aims {
 		do {
 			System.out.println("YOUR CURRENT CART:");
 			anOrder.showCart();
-			System.out.println("Total cost: " + anOrder.totalCost());
+			System.out.println("Total cost: " + anOrder.totalCost() + "$");
 			System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 			System.out.println("What do you want to do next?");
 			System.out.println("1. Listen to demo");
@@ -312,6 +312,7 @@ public class Aims {
 					sortCart();
 					break;
 				case 3:
+					updateQuantityOption();
 					break;
 				case 4:
 					removeDVD();
@@ -419,7 +420,7 @@ public class Aims {
 				sc.nextLine();
 				if (choice > 0 && choice <= Cart.qtyOrdered) {
 					DigitalVideoDisc temp = anOrder.indexToDisc(choice);
-					System.out.println("Item found: " + temp.getTitle() + " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$");
+					System.out.println("Item found: " + temp.getTitle() + " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$" + " - " + anOrder.getQuantity(choice) + " item(s)");
 					return;
 				}
 				else {
@@ -450,5 +451,63 @@ public class Aims {
 				}
 		}
 		while (true);
+	}
+
+	public static void updateQuantityOption() {
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Enter the index of the DVD you want to update quantity:");
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+				if (choice > 0 && choice <= Cart.qtyOrdered) {
+					DigitalVideoDisc temp = anOrder.indexToDisc(choice);
+					System.out.println("Item: " + temp.getTitle() + " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$" + " - " + anOrder.getQuantity(choice) + " item(s)");
+					updateQuantityNumber(choice);
+					return;
+				}
+				else {
+					System.out.println("!!! Item not found. Please index within range.");
+					choice = -1;
+				}
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Item not found. Please enter number.");
+				sc.nextLine();
+				choice = -1;
+			}
+		}
+		while (choice == -1);
+	}
+
+	public static void updateQuantityNumber(int index) {
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Enter the new quantity between 1 and 20 (Quantity <= 0 means removing the DVD)");
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+				if (choice > 0 && choice <= 20) {
+					anOrder.setQuantity(index, choice);
+					System.out.println("Quantity has been updated.");
+					return;
+				}
+				else if (choice <= 0) {
+					anOrder.removeDigitalVideoDisc(index);
+					System.out.println("Quantity has been updated (Removing the DVD)");
+					return;
+				}
+				else {
+					System.out.println("!!! Quantity over limits. Please index within range.");
+					choice = -1;
+				}
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Quantity not possible. Please enter number.");
+				sc.nextLine();
+				choice = -1;
+			}
+		}
+		while (choice == -1);
 	}
 }
