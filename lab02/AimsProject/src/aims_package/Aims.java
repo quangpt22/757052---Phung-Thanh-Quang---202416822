@@ -101,7 +101,7 @@ public class Aims {
 					System.out.println("Exiting the program...");
 					break;
 				default:
-					System.out.println("Invalid option, please try again.");
+					System.out.println("!!! Invalid option, please try again.");
 					break;
 			}
 		}
@@ -133,7 +133,7 @@ public class Aims {
 				case 4:
 					return;
 				default:
-					System.out.println("Invalid option, please try again.");
+					System.out.println("!!! Invalid option, please try again.");
 					break;
 			}
 		}
@@ -154,7 +154,7 @@ public class Aims {
 				case 0:
 					return;
 				default:
-					System.out.println("Invalid option, please try again.");
+					System.out.println("!!! Invalid option, please try again.");
 					break;
 			}
 		}
@@ -195,7 +195,7 @@ public class Aims {
 				case 4:
 					return;
 				default:
-					System.out.println("Invalid option, please try again.");
+					System.out.println("!!! Invalid option, please try again.");
 					break;
 			}
 		}
@@ -228,7 +228,7 @@ public class Aims {
 				case 3:
 					return;
 				default:
-					System.out.println("Invalid option, please try again.");
+					System.out.println("!!! Invalid option, please try again.");
 					break;
 			}
 		}
@@ -262,11 +262,11 @@ public class Aims {
 					return;
 				}
 				else {
-					System.out.println("Invalid option, please try again.");
+					System.out.println("!!! Invalid option, please try again.");
 				}
 			}	
 			else {
-				System.out.println("Invalid title, please try again.");
+				System.out.println("!!! Invalid title, please try again.");
 			}
 		}
 		while (true);
@@ -289,6 +289,7 @@ public class Aims {
 	public static void viewCart() {
 		int choice;
 		do {
+			System.out.println("YOUR CURRENT CART:");
 			anOrder.showCart();
 			System.out.println("Total cost: " + anOrder.totalCost());
 			System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
@@ -297,8 +298,9 @@ public class Aims {
 			System.out.println("2. Sort");
 			System.out.println("3. Update quantity");
 			System.out.println("4. Remove DVD");
-			System.out.println("5. Place order");
-			System.out.println("6. Go back");
+			System.out.println("5. Filter DVDs");
+			System.out.println("6. Place order");
+			System.out.println("7. Go back");
 			choice = sc.nextInt();
 			sc.nextLine();
 
@@ -315,8 +317,11 @@ public class Aims {
 					removeDVD();
 					break;
 				case 5:
+					filterDVD();
 					break;
 				case 6:
+					break;
+				case 7:
 					return;
 				default:
 					break;
@@ -337,11 +342,11 @@ public class Aims {
 					return;
 				}
 				else {
-					System.out.println("Index out of range, please try again");
+					System.out.println("!!! Index out of range, please try again");
 					choice = -1;
 				}
 			} catch (java.util.InputMismatchException e) {
-				System.out.println("Invalid option, please try again");
+				System.out.println("!!! Invalid option, please try again");
 				sc.nextLine();
 				choice = -1;
 			}
@@ -366,15 +371,84 @@ public class Aims {
 					return;
 				}
 				else {
-					System.out.println("Index out of range, please try again");
+					System.out.println("!!! Index out of range, please try again");
 					choice = -1;
 				}
 			} catch (java.util.InputMismatchException e) {
-				System.out.println("Invalid option, please try again");
+				System.out.println("!!! Invalid option, please try again");
 				sc.nextLine();
 				choice = -1;
 			}
 		}
 		while (choice == -1);
+	}
+
+	public static void filterDVD() {
+		int choice;
+		do {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Choose filter type:");
+			System.out.println("1. Filter by id");
+			System.out.println("2. Filter by title");
+			System.out.println("3. Go back");
+			choice = sc.nextInt();
+			sc.nextLine();
+
+			switch (choice) {
+				case 1:
+					filterId();
+					break;
+				case 2:
+					filterTitle();
+					break;
+				case 3: 
+					return;
+				default:
+					break;
+			}
+		}
+		while (true);
+	}
+
+	public static void filterId() {
+		int choice;
+		do {
+			System.out.println("Enter the index of the DVD you want to filter:");
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+				if (choice > 0 && choice <= Cart.qtyOrdered) {
+					DigitalVideoDisc temp = anOrder.indexToDisc(choice);
+					System.out.println("Item found: " + temp.getTitle() + " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$");
+					return;
+				}
+				else {
+					System.out.println("!!! Item not found. Please index within range.");
+					choice = -1;
+				}
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Item not found. Please enter number.");
+				sc.nextLine();
+				choice = -1;
+			}
+		}
+		while (choice == -1);
+	}
+
+	public static void filterTitle() {
+		String title;
+		do {
+			System.out.println("Enter the index of the DVD you want to filter:");
+				title = sc.nextLine().toLowerCase();
+				DigitalVideoDisc temp = anOrder.titleToDisc(title);
+				if (temp != null) {
+					System.out.println("Item found: " + temp.getTitle() + " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$");
+					return;
+				}
+				else {
+					System.out.println("!!! Item not found. Please make sure there are no mispellings.");
+				}
+		}
+		while (true);
 	}
 }

@@ -59,4 +59,14 @@ public class Cart {
 		return itemsOrdered[i-1];
 	}
 	
+	public DigitalVideoDisc titleToDisc (String n) {
+		for (int i = 0; i < qtyOrdered; i++) {
+			DigitalVideoDisc DVD = itemsOrdered[i];
+			String title = DVD.getTitle().toLowerCase();
+			if (title.contains(n)) {
+				return DVD;
+			}
+		}
+		return null;
+	}
 }
