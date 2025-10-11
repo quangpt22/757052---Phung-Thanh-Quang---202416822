@@ -1,4 +1,5 @@
 package aims_package;
+import java.util.Arrays;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
@@ -15,18 +16,17 @@ public class Cart {
 			System.out.println("The cart is almost full!");
 		}
 	}
-	public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-		for (int i = 0; i < qtyOrdered; i++) {
-			if (itemsOrdered[i] == disc) {
-				for (int j = i; j < qtyOrdered - 1; j++) {
-					itemsOrdered[j] = itemsOrdered[j + 1];
-				}
-				qtyOrdered--;
-				itemsOrdered[qtyOrdered] = null;
-				break;
-			}
+
+	public void removeDigitalVideoDisc(int i) {
+		i--;
+		itemsOrdered[i] = null;
+		for (int j = i; j < qtyOrdered - 1; j++) {
+			itemsOrdered[j] = itemsOrdered[j + 1];
 		}
+		qtyOrdered--;
+		itemsOrdered[qtyOrdered] = null;
 	}
+
 	public float totalCost() {
 		float sum = 0;
 		for (int i = 0; i < qtyOrdered; i++) {
@@ -39,11 +39,19 @@ public class Cart {
 	public void showCart() {
 		if (qtyOrdered != 0) {
 			for (int i = 0; i < qtyOrdered; i++) {
-				System.out.println(itemsOrdered[i].getTitle());
+				DigitalVideoDisc temp = itemsOrdered[i];
+				System.out.println((i+1) + ": " + temp.getTitle()+ " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$");
 			}
 		}
 		else {
 			System.out.println("The cart is empty");
+		}
+	}
+
+	public void titleSort() {
+		String array[] = new String[qtyOrdered];
+		for (int i = 0; i < qtyOrdered; i++) {
+			array[i] = itemsOrdered[i].getTitle();
 		}
 	}
 	

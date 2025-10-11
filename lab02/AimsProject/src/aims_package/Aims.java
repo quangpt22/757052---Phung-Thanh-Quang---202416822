@@ -128,6 +128,7 @@ public class Aims {
 					searchDVD();
 					break;
 				case 3:
+					viewCart();
 					break;
 				case 4:
 					return;
@@ -269,10 +270,78 @@ public class Aims {
 			return;
 		}
 		else {
-			System.out.println("The demo is being played");
+			System.out.println("The demo is being played...");
 			System.out.println("The demo has ended. You will be redirected to the previous page.");
 			System.out.println("-----------------------------------------------");
 			return;
 		}
+	}
+
+	public static void viewCart() {
+		int choice;
+		do {
+			anOrder.showCart();
+			System.out.println("Total cost: " + anOrder.totalCost());
+			System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+			System.out.println("What do you want to do next?");
+			System.out.println("1. Listen to demo");
+			System.out.println("2. Sort");
+			System.out.println("3. Update quantity");
+			System.out.println("4. Remove DVD");
+			System.out.println("5. Place order");
+			System.out.println("6. Go back");
+			choice = sc.nextInt();
+			sc.nextLine();
+
+			switch (choice) {
+				case 1:
+					
+					break;
+				case 2:
+					sortCart();
+					break;
+				case 3:
+					break;
+				case 4:
+					removeDVD();
+					break;
+				case 5:
+					break;
+				case 6:
+					return;
+				default:
+					break;
+			}
+		}
+		while (true);
+	}
+
+	public static void sortCart() {
+
+	}
+
+	public static void removeDVD () {
+		int choice = -1;
+		do {
+			System.out.println("Enter the index of the DVD you want to remove:");
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+				if (choice > 0 && choice <= Cart.qtyOrdered) {
+					anOrder.removeDigitalVideoDisc(choice);
+					System.out.println("The disk has been removed.");
+					return;
+				}
+				else {
+					System.out.println("Index out of range, please try again");
+					choice = -1;
+				}
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("Invalid option, please try again");
+				sc.nextLine();
+				choice = -1;
+			}
+		}
+		while (choice == -1);
 	}
 }
