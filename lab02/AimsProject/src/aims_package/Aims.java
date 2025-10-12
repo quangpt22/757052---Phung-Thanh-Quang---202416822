@@ -88,8 +88,14 @@ public class Aims {
 			System.out.println("1. Customer");
 			System.out.println("2. Store manager");
 			System.out.println("3. Exit the program");
-			choice = sc.nextInt();
-			sc.nextLine();
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
+			}
 
 			switch (choice) {
 				case 1:
@@ -99,13 +105,13 @@ public class Aims {
 					break;
 				case 3:
 					System.out.println("Exiting the program...");
-					break;
+					return;
 				default:
-					System.out.println("!!! Invalid option, please try again.");
+					System.out.println("!!! Index out of range, please try again");
 					break;
 			}
 		}
-		while (choice != 3);
+		while (true);
 	}
 
 	public static void customerActions() {
@@ -117,8 +123,14 @@ public class Aims {
 			System.out.println("2. Search DVD");
 			System.out.println("3. View cart");
 			System.out.println("4. Exit to login screen");
-			choice = sc.nextInt();
-			sc.nextLine();
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
+			}
 
 			switch (choice) {
 				case 1:
@@ -133,7 +145,7 @@ public class Aims {
 				case 4:
 					return;
 				default:
-					System.out.println("!!! Invalid option, please try again.");
+					System.out.println("!!! Index out of range, please try again");
 					break;
 			}
 		}
@@ -148,17 +160,24 @@ public class Aims {
 
 			System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 			System.out.println("Enter 0 to go back");
-			choice = sc.nextInt();
-			sc.nextLine();
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
+			}
+
 			switch (choice) {
 				case 0:
 					return;
 				default:
-					System.out.println("!!! Invalid option, please try again.");
+					System.out.println("!!! Invalid option, please try again");
 					break;
 			}
 		}
-		while (choice != 0);
+		while (true);
 	}
 
 	public static void searchDVD() {
@@ -170,8 +189,14 @@ public class Aims {
 			System.out.println("2. Search by category");
 			System.out.println("3. Search by price");
 			System.out.println("4. Exit to main screen");
-			choice = sc.nextInt();
-			sc.nextLine();
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
+			}
 
 			switch (choice) {
 				case 1:
@@ -195,7 +220,7 @@ public class Aims {
 				case 4:
 					return;
 				default:
-					System.out.println("!!! Invalid option, please try again.");
+					System.out.println("!!! Index out of raneg, please try again");
 					break;
 			}
 		}
@@ -210,8 +235,14 @@ public class Aims {
 			System.out.println("1. View detail information");
 			System.out.println("2. Play demo");
 			System.out.println("3. Go back to search DVD screen");
-			choice = sc.nextInt();
-			sc.nextLine();
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
+			}
 
 			switch (choice) {
 				case 1:
@@ -229,7 +260,7 @@ public class Aims {
 				case 3:
 					return;
 				default:
-					System.out.println("!!! Invalid option, please try again.");
+					System.out.println("!!! Index out of range, please try again");
 					break;
 			}
 		}
@@ -237,6 +268,7 @@ public class Aims {
 	}
 
 	public static void viewDVDInfo () {
+		int opt;
 		do {
 			System.out.println("-----------------------------------------------");
 			System.out.println("Enter the title of the DVD you want to view detail information:");
@@ -252,8 +284,15 @@ public class Aims {
 				System.out.println("Please proceed with these actions:");
 				System.out.println("1. Add to cart");
 				System.out.println("2. Return");
-				int opt = sc.nextInt();
-				sc.nextLine();
+				try {
+					opt = sc.nextInt();
+					sc.nextLine();
+				} catch (java.util.InputMismatchException e) {
+					System.out.println("!!! Invalid option, please try again");
+					sc.nextLine();
+					continue;
+				}
+
 				if (opt == 1) {
 					anOrder.addDigitalVideoDisc(addedDVD);
 					anOrder.showCart();
@@ -263,11 +302,11 @@ public class Aims {
 					return;
 				}
 				else {
-					System.out.println("!!! Invalid option, please try again.");
+					System.out.println("!!! Index out of range, please try again");
 				}
 			}	
 			else {
-				System.out.println("!!! Invalid title, please try again.");
+				System.out.println("!!! Invalid title, please try again");
 			}
 		}
 		while (true);
@@ -276,7 +315,7 @@ public class Aims {
 	public static void playDemo(DigitalVideoDisc disc) {
 		int length = disc.getLength();
 		if (length <= 0) {
-			System.out.println("The demo can't be played. You will be redirected to the previous page");
+			System.out.println("The demo can't be played. You will be redirected to the previous page.");
 			return;
 		}
 		else {
@@ -303,8 +342,14 @@ public class Aims {
 			System.out.println("5. Filter DVDs");
 			System.out.println("6. Place order");
 			System.out.println("7. Go back");
-			choice = sc.nextInt();
-			sc.nextLine();
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
+			}
 
 			switch (choice) {
 				case 1:
@@ -328,6 +373,7 @@ public class Aims {
 				case 7:
 					return;
 				default:
+					System.out.println("!!! Index out of range, please try again");
 					break;
 			}
 		}
@@ -383,7 +429,7 @@ public class Aims {
 			}
 			if (choice == 2) {
 				anOrder.sortCost();
-				System.out.println("THe cart has been sorted by cost");
+				System.out.println("THe cart has been sorted by cost.");
 				return;
 			}
 			if (choice == 3) {
