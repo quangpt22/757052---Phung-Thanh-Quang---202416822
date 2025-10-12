@@ -1,0 +1,6 @@
+Note: I did the code before being awared of the particular requirements for this lab, thus you can see
+2 AimsProject files: the standard one is the one adhere to this lab requirements, while the full one is 
+me hard coding the entire requirements from the Aims problem, thus it is bound to have errors and not being 
+particularly "clean" due to my still limited knowledge of Java. The full one is almost done, besides the 
+use case for the store manager. I'd like to finish it so maybe in case you see a commit behind the deadline
+then it's not me turning in late but just that i want to finish the whole thing. Thank you for reading.
