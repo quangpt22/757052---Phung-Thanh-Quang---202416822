@@ -293,7 +293,7 @@ public class Aims {
 			System.out.println("-----------------------------------------------");
 			System.out.println("YOUR CURRENT CART:");
 			anOrder.showCart();
-			System.out.println("Total cost: " + anOrder.totalCost() + "$");
+			System.out.printf("Total cost: %.2f$\\n", anOrder.totalCost());
 			System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 			System.out.println("What do you want to do next?");
 			System.out.println("1. Listen to demo");
@@ -337,6 +337,7 @@ public class Aims {
 	public static void listenToDemo() {
 		int choice = -1;
 		do {
+			System.out.println("-----------------------------------------------");
 			System.out.println("Enter the index of the DVD you want to listen to the demo:");
 			try {
 				choice = sc.nextInt();
@@ -359,7 +360,39 @@ public class Aims {
 	}
 
 	public static void sortCart() {
+		int choice;
+		while (true) {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Please choose the type of sort");
+			System.out.println("1. Sort by title");
+			System.out.println("2. Sort by cost");
+			System.out.println("3. Go back");
+			try {
+				choice = sc.nextInt();
+				sc.nextLine();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
+			}
 
+			if (choice == 1) {
+				anOrder.sortTitle();
+				System.out.println("The cart has been sorted by title.");
+				return;
+			}
+			if (choice == 2) {
+				anOrder.sortCost();
+				System.out.println("THe cart has been sorted by cost");
+				return;
+			}
+			if (choice == 3) {
+				return;
+			}
+			else {
+				System.out.println("!!! Index out of range, please try again");
+			}
+		}
 	}
 
 	public static void removeDVD () {
