@@ -290,6 +290,7 @@ public class Aims {
 	public static void viewCart() {
 		int choice;
 		do {
+			System.out.println("-----------------------------------------------");
 			System.out.println("YOUR CURRENT CART:");
 			anOrder.showCart();
 			System.out.println("Total cost: " + anOrder.totalCost() + "$");
@@ -515,6 +516,10 @@ public class Aims {
 
 	public static void placeOrder() {
 		int choice;
+		if (Cart.qtyOrdered == 0) {
+        	System.out.println("!!! Your cart is empty. Please add some DVDs before placing an order.");
+        	return;
+    	}
 		do {
 			System.out.println("-----------------------------------------------");
 			System.out.println("Please enter your name: ");
@@ -522,32 +527,64 @@ public class Aims {
 			double finalFee = anOrder.feeCalculation();
 			System.out.println("-----------------------------------------------");
 			System.out.println("Please choose the following options:");
-			System.out.println("1. Proceed payment");
-			System.out.println("2. Go back");
+			System.out.println("1. Proceed to payment screen");
+			System.out.println("2. Cancel and return to the previous page");
 			try {
 				choice = sc.nextInt();
 				sc.nextLine();
-			
-				switch (choice) {
-					case 1:
-						System.out.println("Customer name: " + custName);
-						System.out.println("Transfer amount: " + finalFee);
-						return;
-					case 2:
-					  	return;
-					default:
-						break;
-				}
-			}
-			catch (java.util.InputMismatchException e) {
+			} catch (java.util.InputMismatchException e) {
 				System.out.println("!!! Invalid option, please try again");
+				sc.nextLine();
+				continue;
 			}
 
+			if (choice == 1) {
+				long transactionId = Math.round(Math.random() * 9000000) + 1000000;
+				System.out.println("PAYMENT DETAIL:");
+				System.out.println("Transaction ID: " + transactionId);
+				System.out.println("Customer name: " + custName);
+				System.out.println("Transfer amount: " + finalFee +"$");
+				System.out.println("Please choose the following options:");
+				System.out.println("1. Pay order");
+				System.out.println("2. Cancel");
+
+				int confirm;
+				try {
+					confirm = sc.nextInt();
+					sc.nextLine();
+				} catch (java.util.InputMismatchException e) {
+					System.out.println("!!! Invalid option, please try again");
+					sc.nextLine();
+					continue;
+				}
+
+				if (confirm == 1) {
+					System.out.println("Thank you for your order. The order will be processed by the store manager and proceed to you soon.");
+					while (Cart.qtyOrdered > 0) {
+                    	anOrder.removeDigitalVideoDisc(1);
+						anOrder.setQuantity(1, 0);
+                	}
+					return;
+				}
+				else if (confirm == 2) {
+					anOrder.resetQuantityAfterCancel();
+					System.out.println("Order cancelled. Returning to your cart screen...");
+					return;
+				}
+				else {
+					System.out.println("!!! Index out of range, please try again");
+				}
+
+			}
+			else if (choice == 2) {
+				anOrder.resetQuantityAfterCancel();
+				System.out.println("Returning to the previous page...");
+				return;
+			}
+			else {
+				System.out.println("!!! Index out of range, please try again");
+			}				
 		}
 		while (true);
-	}
-
-	public static void payOrder() {
-
-	}
+	}	
 }
