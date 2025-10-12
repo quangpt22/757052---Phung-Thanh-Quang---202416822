@@ -1,5 +1,6 @@
 package aims_package;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
@@ -7,6 +8,7 @@ public class Cart {
 	private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
 	private int quantity[] = new int[MAX_NUMBERS_ORDERED];
 	public static int qtyOrdered = 0;
+	public static int freeItemIndex;
 	
 	public void addDigitalVideoDisc(DigitalVideoDisc disc) {
 		if (qtyOrdered < MAX_NUMBERS_ORDERED) {
@@ -80,6 +82,46 @@ public class Cart {
 		quantity[index - 1] = quant;
 	}
 
+	public void sortTitle() {
+		DVDOrder[] orders = new DVDOrder[qtyOrdered];
+		for (int i = 0; i < qtyOrdered; i++) {
+    		orders[i] = new DVDOrder(itemsOrdered[i], quantity[i]);
+		}
+		Arrays.sort(orders, new Comparator<DVDOrder>() {
+    		public int compare(DVDOrder d1, DVDOrder d2) {
+				DigitalVideoDisc disc1 = d1.getDisc();
+				DigitalVideoDisc disc2 = d2.getDisc();
+        		int titleCompare = disc1.getTitle().compareToIgnoreCase(disc2.getTitle());
+        		if (titleCompare != 0) return titleCompare;
+        		return Float.compare(disc2.getCost(), disc1.getCost());
+    		}
+		});
+		for (int i = 0; i < qtyOrdered; i++) {
+    		itemsOrdered[i] = orders[i].getDisc();
+    		quantity[i] = orders[i].getQuantity();
+		}
+	}
+
+	public void sortCost() {
+		DVDOrder[] orders = new DVDOrder[qtyOrdered];
+		for (int i = 0; i < qtyOrdered; i++) {
+    		orders[i] = new DVDOrder(itemsOrdered[i], quantity[i]);
+		}
+		Arrays.sort(orders, new Comparator<DVDOrder>() {
+    		public int compare(DVDOrder d1, DVDOrder d2) {
+				DigitalVideoDisc disc1 = d1.getDisc();
+				DigitalVideoDisc disc2 = d2.getDisc();
+        		int costCompare = Float.compare(disc2.getCost(), disc1.getCost());
+        		if (costCompare != 0) return costCompare;
+        		return disc1.getTitle().compareToIgnoreCase(disc2.getTitle());
+    		}
+		});
+		for (int i = 0; i < qtyOrdered; i++) {
+    		itemsOrdered[i] = orders[i].getDisc();
+    		quantity[i] = orders[i].getQuantity();
+		}
+	}
+
 	public int getQuantity (int i) {
 		return quantity[i - 1];
 	}
@@ -96,7 +138,7 @@ public class Cart {
 	public double feeCalculation() {
 		int maxFee = 10;
 		int minFee = 3;
-		int freeItemIndex = (int)(Math.random() * qtyOrdered);
+		freeItemIndex = (int)(Math.random() * qtyOrdered);
 		quantity[freeItemIndex]--;
 		System.out.println("NOTE: As part of our program, a DVD will be picked randomly to be free of charge. The DVD in question is " + itemsOrdered[freeItemIndex].getTitle() + " - " + itemsOrdered[freeItemIndex].getDirector());
 		System.out.println("Your current order (Excluding the free item): ");
@@ -106,11 +148,15 @@ public class Cart {
 			total += temp.getCost() * quantity[i];
 			System.out.println((i+1) + ": " + temp.getTitle()+ " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$" + " - " + quantity[i] + " item(s)");
 		}
-		double deliveryFee = (Math.random() * (maxFee - minFee + 1)) + minFee;
-		System.out.println("Delivery fee: " + deliveryFee);
-		System.out.println("Total cost before VAT: " + (total + deliveryFee));
-		double totalFinal = (total + deliveryFee) * (1 + VAT);
-		System.out.println("Total cost after VAT (10%) " + totalFinal);
+		double deliveryFee = Math.round(((Math.random() * (maxFee - minFee)) + minFee) * 100) / 100;
+		System.out.println("Delivery fee: " + deliveryFee + "$");
+		System.out.println("Total cost before VAT: " + (total + Math.round(deliveryFee)) + "$");
+		double totalFinal = Math.round((total + deliveryFee) * (1 + VAT));
+		System.out.println("Total cost after VAT (10%): " + totalFinal + "$");
 		return totalFinal;
+	}
+
+	public void resetQuantityAfterCancel() {
+		quantity[freeItemIndex]++;
 	}
 }
