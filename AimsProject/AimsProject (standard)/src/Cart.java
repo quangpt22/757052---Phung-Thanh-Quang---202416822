@@ -53,7 +53,7 @@ public class Cart {
 		if (qtyOrdered != 0) {
 			for (int i = 0; i < qtyOrdered; i++) {
 				DigitalVideoDisc temp = itemsOrdered[i];
-				System.out.println((i+1) + ": " + temp.getTitle()+ " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$");
+				System.out.println(temp.toString());
 			}
 			return true;
 		}
@@ -68,7 +68,29 @@ public class Cart {
 		for (int i = 0; i < store.length; i++) {
 			if (store[i] == null) break;
 			DigitalVideoDisc temp = store[i];
-			System.out.println((i + 1) + ": " + temp.getTitle() + " - " + temp.getCategory() + " - " + temp.getDirector() + " - " + temp.getLength() + " mins - " + temp.getCost() + "$");
+			System.out.println(temp.toString());
 		}
+	}
+
+	public DigitalVideoDisc searchByTitle(String title) {
+		for (int i = 0; i < store.length; i++) {
+			DigitalVideoDisc temp = itemsOrdered[i];
+			if (temp.isMatch(title)) {
+				return temp;
+			}
+		}
+		System.out.println("No result is found!");
+		return null;
+	}
+
+	public DigitalVideoDisc searchById(int id) {
+		for (int i = 0; i < store.length; i++) {
+			DigitalVideoDisc temp = itemsOrdered[i];
+			if (temp.getId() == id) {
+				return temp;
+			}
+		}
+		System.out.println("No result is found!");
+		return null;
 	}
 }
