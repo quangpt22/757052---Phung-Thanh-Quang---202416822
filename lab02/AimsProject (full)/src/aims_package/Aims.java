@@ -332,7 +332,7 @@ public class Aims {
 			System.out.println("-----------------------------------------------");
 			System.out.println("YOUR CURRENT CART:");
 			anOrder.showCart();
-			System.out.printf("Total cost: %.2f$\\n", anOrder.totalCost());
+			System.out.printf("Total cost: %.2f$\n", anOrder.totalCost());
 			System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 			System.out.println("What do you want to do next?");
 			System.out.println("1. Listen to demo");
