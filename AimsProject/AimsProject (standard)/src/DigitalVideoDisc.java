@@ -65,4 +65,18 @@ public class DigitalVideoDisc {
 		nbDigitalVideoDiscs++;
 		this.id = nbDigitalVideoDiscs;
 	}
+
+	public String toString() {
+		return id + ". " + title + " - " + category + " - " + director + " - " + length + " mins - " + cost + "$";
+	}
+
+	public boolean isMatch(String title) {
+		String tmp = this.title.toLowerCase();
+		if (tmp.contains(title.toLowerCase())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
