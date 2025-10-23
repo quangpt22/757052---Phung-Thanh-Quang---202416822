@@ -159,4 +159,9 @@ public class Cart {
 	public void resetQuantityAfterCancel() {
 		quantity[freeItemIndex]++;
 	}
+
+	public void transferOrder(int index) {
+		DigitalVideoDisc disc = itemsOrdered[index];
+		int amount = quantity[index];
+	}
 }
