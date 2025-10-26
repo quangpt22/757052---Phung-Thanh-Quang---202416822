@@ -18,6 +18,17 @@ public class Cart {
 		store[9] = new DigitalVideoDisc("Fight Club", "Drama", "David Fincher", 139, 23.95f);
 	}
 	
+	public void addDigitalVideoDisc(DigitalVideoDisc dvd) {
+		if (qtyOrdered < MAX_NUMBERS_ORDERED) {
+			itemsOrdered[qtyOrdered] = dvd;
+			qtyOrdered++;
+			System.out.println("The disc has been added");
+		}
+		else {
+			System.out.println("The cart is almost full!");
+		}
+	}
+
 	public void addDigitalVideoDisc(int i) {
 		if (qtyOrdered < MAX_NUMBERS_ORDERED) {
 			itemsOrdered[qtyOrdered] = store[i - 1];
@@ -61,6 +72,24 @@ public class Cart {
 			System.out.println("The cart is currently empty");
 			return false;
 		}
+	}
+
+	public void print() {
+		float sum = 0;
+		System.out.println("***********************CART*********************** ");
+		if (qtyOrdered != 0) {
+			System.out.println("	Ordered Items:");
+			for (int i = 0; i < qtyOrdered; i++) {
+				DigitalVideoDisc temp = itemsOrdered[i];
+				sum += temp.getCost();
+				System.out.println(temp.toString());
+			}
+			System.out.println("Total cost: " + sum);
+		}
+		else {
+			System.out.println("The cart is currently empty");
+		}
+		System.out.println("***************************************************");
 	}
 	
 	public void showStore() {
