@@ -1,4 +1,7 @@
+package hust.soict.dsai.aims;
 import java.util.Scanner;
+
+import hust.soict.dsai.aims.cart.Cart;
 
 public class Aims {
 	static Scanner sc = new Scanner(System.in);
