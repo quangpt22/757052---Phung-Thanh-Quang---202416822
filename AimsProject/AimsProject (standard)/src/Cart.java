@@ -78,13 +78,13 @@ public class Cart {
 		float sum = 0;
 		System.out.println("***********************CART*********************** ");
 		if (qtyOrdered != 0) {
-			System.out.println("	Ordered Items:");
+			System.out.println("Ordered Items:");
 			for (int i = 0; i < qtyOrdered; i++) {
 				DigitalVideoDisc temp = itemsOrdered[i];
 				sum += temp.getCost();
 				System.out.println(temp.toString());
 			}
-			System.out.println("Total cost: " + sum);
+			System.out.println("Total cost: " + sum + "$");
 		}
 		else {
 			System.out.println("The cart is currently empty");

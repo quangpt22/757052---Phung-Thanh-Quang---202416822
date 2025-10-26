@@ -13,5 +13,13 @@ public class CartTest {
 
         // Test print method
         cart.print();
+
+        // Test search by ID
+        DigitalVideoDisc disk1 = cart.searchById(2);
+        System.out.println(disk1.toString());
+
+        // Test search by title
+        DigitalVideoDisc disk2 = cart. searchByTitle("godfather");
+        System.out.println(disk2.toString());
     }
 }
