@@ -1,5 +1,6 @@
 package hust.soict.dsai.aims.media;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book extends Media {
@@ -31,8 +32,9 @@ public class Book extends Media {
 			System.out.println("Author not in list");
 		}
 	}
-	public Book() {
-		// TODO Auto-generated constructor stub
+	public Book(int id, String title, String category, float cost, List<String> authors) {
+		super(id, title, category, cost);
+		this.authors = authors;
 	}
 
 }
