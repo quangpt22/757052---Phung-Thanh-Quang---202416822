@@ -1,5 +1,40 @@
-Q: Is JAVA a Pass by Value or a Pass by Reference programming language?
-A: By definition, Java is a pass by value language - When you pass an argument to a method, Java copies the value of that argument into the method’s parameter. 
-However, the confusion usually comes from when passing an object argument to a method, as variables that refer to objects store the value in memory that the objects
-also point to. So changing an attribute in the local object would also change its value in the global object that was referred to (thus make people usually confuse 
-with pass by reference).
+Q1: What class should implement the Comparable interface?
+A: Media should since we are sorting between multiple child classes of Media where they share
+certain common attributes that fit the criteria for natural ordering like sort by title or length
+
+Q2: In those classes, how should you implement the compareTo() method be to reflect the ordering that we 
+want? 
+A: @Override
+    public int compareTo(Media other) {
+        // First compare by title
+        int titleCompare = this.title.compareTo(other.title);
+        if (titleCompare != 0) {
+            return titleCompare;
+        }
+        // If titles are equal, compare by cost (descending - higher cost first)
+        return Float.compare(other.cost, this.cost); 
+    }
+
+Q3: Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this 
+Comparable interface approach? 
+A: No, we cannot have two or more rules of the item because Comparable allows 1 strategy to be the "natural"
+ordering, unlike comparator where we can declare multiple orderings.
+
+Q4: Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing 
+length, then cost. How would you modify your code to allow this?
+A: Since comparable is implemented at Media level, thus to handle DVD (subclass of Media) specific ordering, we 
+can override the method at DVD level
+    public class DigitalVideoDisc extends Disc implements Playable {
+    @Override
+    public int compareTo(Media other) {
+        DigitalVideoDisc otherDVD = (DigitalVideoDisc) other;
+        
+        int titleCompare = this.title.compareTo(otherDVD.title);
+        if (titleCompare != 0) return titleCompare;
+        
+        int lengthCompare = Integer.compare(otherDVD.length, this.length); 
+        if (lengthCompare != 0) return lengthCompare;
+        
+        return Float.compare(this.cost, otherDVD.cost);
+    }
+}

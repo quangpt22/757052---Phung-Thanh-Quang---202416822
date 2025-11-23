@@ -93,7 +93,7 @@ public class Aims {
 				storeMenu();
 				break;
 			case 2:
-//				
+				updateStoreMenu();
 				break;
 			case 3:
 				cartMenu();
@@ -159,6 +159,7 @@ public class Aims {
         if (media != null) {
             System.out.println("Media Details:");
             System.out.println(media.toString());
+            mediaDetailsMenu(media);
         } 
         else {
             System.out.println("!!! Media not found");
@@ -185,7 +186,8 @@ public class Aims {
 			switch(choice) {
 			case 1:
 				anOrder.addMedia(media);
-				break;
+				System.out.println("Number of media in current cart: " + anOrder.size());
+				return;
 			case 2:
 				if (media instanceof Playable) {
 					((Playable) media).play();
@@ -257,6 +259,7 @@ public class Aims {
 			}
 			switch(choice) {
 			case 1:
+				filterCartMenu();
 				break;
 			case 2:
 				sortCartMenu();
@@ -356,6 +359,52 @@ public class Aims {
             anOrder.removeMedia(media);
         } else {
             System.out.println("Media not found in cart!");
+        }
+    }
+	
+	public static void updateStoreMenu() {
+        int choice;
+        do {
+            System.out.println("Update Store:");
+            System.out.println("-----------------------------------------------");
+            System.out.println("1. Add media to store");
+            System.out.println("2. Remove media from store");
+            System.out.println("0. Back");
+            System.out.println("-----------------------------------------------");
+            System.out.println("Please choose a number: 0-1-2");
+            
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("!!! Invalid option, please try again");
+                sc.nextLine();
+                continue;
+            }
+            
+            switch(choice) {
+                case 1:
+                    break;
+                case 2:
+                    removeMediaFromStore();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("!!! Invalid option, please try again");
+            }
+        } while (true);
+    }
+	
+	public static void removeMediaFromStore() {
+        System.out.print("Enter media title to remove: ");
+        String title = sc.nextLine();
+        Media media = store.findMediaByTitle(title);
+        
+        if (media != null) {
+            store.removeMedia(media);
+        } else {
+            System.out.println("Media not found!");
         }
     }
 	

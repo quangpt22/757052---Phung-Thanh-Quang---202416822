@@ -92,11 +92,21 @@ public class Cart {
 //	}
 	
 	public void addMedia(Media media) {
-		itemsOrdered.add(media);
+		if (!itemsOrdered.contains(media)) {
+            itemsOrdered.add(media);
+            System.out.println("Media has been added to cart");
+        } else {
+            System.out.println("Media is already in cart");
+        }
 	}
 	
 	public void removeMedia(Media media) {
-		itemsOrdered.remove(media);
+		if (itemsOrdered.contains(media)) {
+            itemsOrdered.remove(media);
+            System.out.println("Media has been removed");
+        } else {
+            System.out.println("Media not found in cart");
+        }
 	}
 	
 	public float totalCost() {

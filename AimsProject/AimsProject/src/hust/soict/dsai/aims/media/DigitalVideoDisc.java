@@ -16,7 +16,7 @@ public class DigitalVideoDisc extends Disc implements Playable {
 	}
 
 	public String toString() {
-		return id + ". " + title + " - " + category + " - " + getDirector() + " - " + getLength() + " mins - " + cost + "$";
+		return title + " - " + category + " - " + getDirector() + " - " + getLength() + " mins - " + cost + "$";
 	}
 
 	public boolean isMatch(String title) {
