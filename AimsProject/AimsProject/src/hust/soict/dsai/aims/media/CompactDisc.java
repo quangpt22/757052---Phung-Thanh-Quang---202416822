@@ -3,7 +3,7 @@ package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompactDisc extends Disc{
+public class CompactDisc extends Disc implements Playable{
 	private static int nbCompactDisc = 1;
 	private String artist;
 	private List<Track> tracks = new ArrayList<Track>();
@@ -14,11 +14,21 @@ public class CompactDisc extends Disc{
 	}
 	
 	public void addTrack(Track track) {
-		
+		if (!(tracks.contains(track))) {
+			tracks.add(track);
+		}
+		else {
+			System.out.println("Track already in disc");
+		}
 	}
 	
 	public void removeTrack(Track track) {
-		
+		if (tracks.contains(track)) {
+			tracks.add(track);
+		}
+		else {
+			System.out.println("Track not in disc");
+		}
 	}
 	
 	public int getLength() {
@@ -27,6 +37,14 @@ public class CompactDisc extends Disc{
 			sum += tracks.get(i).getLength();
 		}
 		return sum;
+	}
+	
+	public void play() {
+		System.out.println("CompactDisc: " + title);
+		System.out.println("Artist: " + artist);
+		for (int i = 0; i < tracks.size(); i++) {
+			tracks.get(i).play();
+		}
 	}
 
 }
