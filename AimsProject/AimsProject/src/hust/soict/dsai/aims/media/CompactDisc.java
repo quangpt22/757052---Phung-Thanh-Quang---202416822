@@ -7,8 +7,8 @@ public class CompactDisc extends Disc implements Playable{
 	private static int nbCompactDisc = 1;
 	private String artist;
 	private List<Track> tracks = new ArrayList<Track>();
-	public CompactDisc(String title, String artist, List<Track> tracks) {
-		super(nbCompactDisc, title, "", 0, 0, "");
+	public CompactDisc(String title, String category, float cost, int length, String director, String artist, List<Track> tracks) {
+		super(nbCompactDisc, title, category, cost, length, director);
 		this.artist = artist;
 		this.tracks = tracks;
 	}
@@ -45,6 +45,10 @@ public class CompactDisc extends Disc implements Playable{
 		for (int i = 0; i < tracks.size(); i++) {
 			tracks.get(i).play();
 		}
+	}
+	
+	public String toString() {
+		return this.title + " - " + this.category + " - Artist: " + this.artist + " - Director: " + getDirector() + " - Length: " + getLength() + " - $" + getCost();
 	}
 
 }

@@ -32,6 +32,11 @@ public class Book extends Media {
 			System.out.println("Author not in list");
 		}
 	}
+	
+	public String toString() {
+		return this.title + " - " + this.category + " - Authors: " + this.authors + " - $" + this.cost;
+	}
+	
 	public Book(int id, String title, String category, float cost, List<String> authors) {
 		super(id, title, category, cost);
 		this.authors = authors;
