@@ -3,8 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.SwingUtilities;
+
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.*;
+import hust.soict.dsai.aims.screen.StoreScreen;
 import hust.soict.dsai.aims.store.Store;
 
 public class Aims {
@@ -65,7 +68,12 @@ public class Aims {
 	    store.addMedia(cd2);
 	    store.addMedia(cd3);
 	    store.addMedia(cd4);
-		showMenu();
+//		showMenu();
+	    
+	    
+	    SwingUtilities.invokeLater(() -> {
+            new StoreScreen(store);
+        });
 	}
 	
 	public static void showMenu() {

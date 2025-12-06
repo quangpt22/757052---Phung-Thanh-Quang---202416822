@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import hust.soict.dsai.aims.media.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
-	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+	private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 	
 //	public void initializeStore() {
 //		store[0] = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
@@ -172,5 +174,9 @@ public class Cart {
     public void placeOrder() {
         System.out.println("Order has been successfully created!");
         itemsOrdered.clear();
+    }
+    
+    public ObservableList<Media> getItemsOrdered() {
+    	return itemsOrdered;
     }
 }
