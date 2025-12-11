@@ -1,7 +1,12 @@
 package hust.soict.dsai.aims.screen;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.*;
+import hust.soict.dsai.aims.store.Store;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
@@ -13,6 +18,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class CartScreenController {
 
 private Cart cart;
+private Store store;
+private CartScreen cartScreen;
     
     @FXML
     private TableView<Media> tblMedia;
@@ -35,9 +42,17 @@ private Cart cart;
     @FXML
     private Label lblTotalCost;
     
-    public CartScreenController(Cart cart) {
+    @FXML
+    private MenuItem itemViewStore;
+    
+    @FXML
+    private Button btnPlaceOrder;
+    
+    public CartScreenController(Cart cart, Store store, CartScreen cartScreen) {
         super();
         this.cart = cart;
+        this.store = store;
+        this.cartScreen = cartScreen;
     }
     
     @FXML
@@ -58,6 +73,10 @@ private Cart cart;
         cart.getItemsOrdered().addListener((ListChangeListener<Media>) change -> {
             totalCostDisplay();
         });
+        
+        if (itemViewStore != null) {
+            itemViewStore.setOnAction(e -> viewStorePressed(e));
+        }
         
         tblMedia.getSelectionModel().selectedItemProperty().addListener(
         		new ChangeListener<Media>() {
@@ -96,7 +115,28 @@ private Cart cart;
     @FXML
     void btnPlayPressed(ActionEvent event) {
     	Media media = tblMedia.getSelectionModel().getSelectedItem();
-    	((Playable) media).play();
+        if (media instanceof Playable) {
+            try {
+                ((Playable) media).play();
+            } catch (PlayerException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Playback Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
-
+    
+    @FXML
+    void viewStorePressed(ActionEvent event) {
+    	cartScreen.dispose();
+        
+        SwingUtilities.invokeLater(() -> {
+            new StoreScreen(store, cart);
+        });
+    }
+    
+    @FXML
+    void btnPlaceOrderPressed(ActionEvent event) {
+        cart.placeOrder(); 
+        tblMedia.getItems().clear();
+        totalCostDisplay();
+    }
 }

@@ -5,12 +5,15 @@ import java.awt.*;
 import javax.swing.*;
 
 import hust.soict.dsai.aims.media.Media;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.*;
 
 public class MediaStore extends JPanel{
 
 	private Media media;
-    public MediaStore(Media media) {
+	private StoreScreen storeScreen;
+	
+    public MediaStore(Media media, StoreScreen storeScreen) {
         this.media = media;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
@@ -23,10 +26,17 @@ public class MediaStore extends JPanel{
 
         JPanel container = new JPanel();
         container.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        container.add(new JButton("Add to cart"));
+        
+        JButton btnAddToCart = new JButton("Add to cart");
+        btnAddToCart.addActionListener(e -> {
+        	storeScreen.getCart().addMedia(media);
+        });
+        container.add(btnAddToCart);
+        
         if (media instanceof Playable) {
-            container.add(new JButton("Play"));
+        	JButton btnPlay = new JButton("Play");
+        	btnPlay.addActionListener(e -> playMedia());
+            container.add(btnPlay);
         }
 
         this.add(Box.createVerticalGlue());
@@ -36,6 +46,19 @@ public class MediaStore extends JPanel{
         this.add(container);
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    }
+    
+    private void playMedia() {
+    	if (media instanceof Playable) {
+            try {
+                ((Playable) media).play();
+            } catch (PlayerException e) {
+                JOptionPane.showMessageDialog(this, 
+                    "Error playing " + media.getTitle() + ":\n" + e.getMessage(), 
+                    "Playback Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
 }
